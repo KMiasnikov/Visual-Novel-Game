@@ -911,6 +911,106 @@ const gameData = {
       ]
     },
     
+    conflict_admit: {
+      background: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      characters: [
+        {
+          name: 'Alex',
+          position: 'right',
+          speaking: true,
+          image: AlexImage
+        },
+        {
+          name: 'Jordan',
+          position: 'left',
+          speaking: false,
+          image: JordanImage
+        }
+      ],
+      dialog: {
+        speaker: 'Alex',
+        text: 'You\'re right to be concerned. Jamie and I have been talking a lot, and while nothing physical happened, I\'ve been sharing things with them that I should have been sharing with you. I\'m so sorry. I never meant to develop feelings, but I realize now I\'ve been emotionally unfaithful.'
+      },
+      choices: [
+        { id: 'choice1', text: 'Jordan offers forgiveness', nextScene: 'admit_forgive' },
+        { id: 'choice2', text: 'Jordan needs time to process', nextScene: 'admit_time' }
+      ]
+    },
+    
+    admit_forgive: {
+      background: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      characters: [
+        {
+          name: 'Jordan',
+          position: 'left',
+          speaking: true,
+          image: JordanImage
+        },
+        {
+          name: 'Alex',
+          position: 'right',
+          speaking: false,
+          image: AlexImage
+        }
+      ],
+      dialog: {
+        speaker: 'Jordan',
+        text: 'Thank you for being honest with me. It hurts, but your honesty means everything. We all make mistakes, and I appreciate that you had the courage to admit it. I think we can work through this if we both commit to being more open with each other.'
+      },
+      choices: [
+        { id: 'choice1', text: 'Continue the story', nextScene: 'resolution_admit_positive' }
+      ]
+    },
+    
+    admit_time: {
+      background: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      characters: [
+        {
+          name: 'Jordan',
+          position: 'left',
+          speaking: true,
+          image: JordanImage
+        },
+        {
+          name: 'Alex',
+          position: 'right',
+          speaking: false,
+          image: AlexImage
+        }
+      ],
+      dialog: {
+        speaker: 'Jordan',
+        text: 'I appreciate your honesty, but I need some time to process this. Trust is really important to me, and this is going to take a while to rebuild. I\'m not saying it\'s over, but I need space to think about what this means for us.'
+      },
+      choices: [
+        { id: 'choice1', text: 'Continue the story', nextScene: 'resolution_admit_challenge' }
+      ]
+    },
+    
+    resolution_admit_positive: {
+      background: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+       
+      dialog: {
+        speaker: 'Narrator',
+        text: 'The following months weren\'t easy, but Alex and Jordan committed to rebuilding their relationship. They started couples counseling, established clearer boundaries, and practiced radical honesty. The painful experience ultimately brought them closer, creating a stronger foundation of trust.'
+      },
+      choices: [
+        { id: 'choice1', text: 'Continue to the epilogue', nextScene: 'epilogue_compromise' }
+      ]
+    },
+    
+    resolution_admit_challenge: {
+      background: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+       
+      dialog: {
+        speaker: 'Narrator',
+        text: 'Jordan took two weeks of space, during which Alex respected their boundaries while making small gestures to show remorse. When they finally talked again, they agreed to try to rebuild, but with the understanding that it would be a long road. Their relationship was forever changed, but with time and effort, a new kind of trust slowly began to form.'
+      },
+      choices: [
+        { id: 'choice1', text: 'Continue to the epilogue', nextScene: 'epilogue_bittersweet' }
+      ]
+    },
+    
     challenge_ex: {
       background: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
       characters: [
@@ -1192,7 +1292,7 @@ const gameData = {
     },
     
     ending_compromise: {
-      background: 'https://images.unsplash.com/photo-1522158637959-30ab8018e198?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      background: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1350&q=80',
       characters: [
         {
           name: 'Alex',
