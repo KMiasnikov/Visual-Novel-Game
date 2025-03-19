@@ -74,7 +74,7 @@ To package the application for distribution:
 npm run package
 ```
 
-This will create distributable packages in the `Visual_Novel` directory using electron-builder.
+This will create distributable packages in the `Visual_Novel_Game` directory using electron-builder.
 
 ## Development Workflow
 
