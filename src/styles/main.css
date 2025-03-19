@@ -1,0 +1,547 @@
+/* Main styles for the visual novel application */
+
+:root {
+  --primary-color: #e94057;
+  --secondary-color: #f27121;
+  --text-color: #2d3436;
+  --background-color: #f7f1e3;
+  --accent-color: #6c5ce7;
+  --dialog-bg: rgba(255, 255, 255, 0.85);
+  --dialog-border: rgba(108, 92, 231, 0.3);
+  --font-main: 'Poppins', sans-serif;
+  --font-decorative: 'Dancing Script', cursive;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 15px 35px rgba(0, 0, 0, 0.25);
+  --transition-smooth: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --glow-effect: 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(247, 241, 227, 0.9) 0%, rgba(233, 64, 87, 0.2) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Parallax Effect */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.3"/></svg>');
+  pointer-events: none;
+  animation: parallaxShift 60s linear infinite;
+  z-index: -1;
+}
+
+/* Welcome Screen Styles */
+.welcome-screen {
+  text-align: center;
+  padding: 3.5rem;
+  max-width: 850px;
+  margin: 0 auto;
+  background-color: var(--dialog-bg);
+  border-radius: 25px;
+  box-shadow: var(--shadow-strong);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--dialog-border);
+  backdrop-filter: blur(10px);
+  transform: perspective(1000px) rotateX(2deg);
+  transition: var(--transition-smooth);
+}
+
+.welcome-screen:hover {
+  transform: perspective(1000px) rotateX(0deg) scale(1.02);
+  box-shadow: var(--shadow-strong), var(--glow-effect);
+}
+
+.welcome-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, transparent 100%);
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.welcome-title {
+  font-family: var(--font-decorative);
+  font-size: 4.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+  animation: titlePulse 2s infinite alternate;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+
+.welcome-message {
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  position: relative;
+  padding: 0 1.5rem;
+}
+
+.welcome-message::before, .welcome-message::after {
+  content: '"';
+  font-family: var(--font-decorative);
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  opacity: 0.5;
+  position: absolute;
+}
+
+.welcome-message::before {
+  top: -1.5rem;
+  left: 0;
+}
+
+.welcome-message::after {
+  bottom: -2rem;
+  right: 0;
+}
+
+.start-button {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 1.2rem 3.5rem;
+  font-size: 1.3rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(233, 64, 87, 0.4);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.start-button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(233, 64, 87, 0.5), 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+.start-button:hover::before {
+  left: 100%;
+  animation: buttonGlow 1.5s infinite;
+}
+
+.start-button:active {
+  transform: translateY(-2px);
+}
+
+/* Novel Scene Styles */
+.novel-scene {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.scene-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  transition: opacity 1.5s ease, transform 30s ease-out;
+  filter: brightness(0.95) contrast(1.05);
+  transform-origin: center center;
+  animation: slowZoom 60s infinite alternate ease-in-out;
+}
+
+.scene-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.character {
+  position: absolute;
+  bottom: auto;
+  top: auto;
+  height: 40%;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+  object-fit: contain;
+  max-width: 40%;
+  transform-origin: bottom center;
+}
+
+.character.speaking {
+  transform: scale(1.05);
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.4)) brightness(1.1);
+  z-index: 10 !important;
+  animation: subtlePulse 3s infinite alternate;
+}
+
+.character.left {
+  left: 20%;
+  transform: translateX(-50px);
+  animation: characterSlideInLeft 1s forwards;
+}
+
+.character.center {
+  left: 50%;
+  transform: translateX(-50%);
+  animation: characterSlideInBottom 1s forwards;
+}
+
+.character.right {
+  right: 20%;
+  transform: translateX(50px);
+  animation: characterSlideInRight 1s forwards;
+}
+
+.dialog-box {
+  position: absolute;
+  bottom: 2%;
+  left: 1%;
+  width: 98%;
+  max-width: 98%;
+  background-color: var(--dialog-bg);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: var(--shadow-soft);
+  z-index: 10;
+  border: 1px solid var(--dialog-border);
+  backdrop-filter: blur(10px);
+  animation: dialogBoxAppear 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin: 0 auto;
+  overflow-x: hidden;
+  transition: var(--transition-smooth);
+}
+
+.dialog-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.dialog-content {
+  position: relative;
+  text-align: center;
+}
+
+.character-name {
+  font-family: var(--font-decorative);
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  display: inline-block;
+}
+
+.character-name::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  transform: translateX(-50%);
+}
+
+.dialog-text {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.choices-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.choice-button {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid var(--accent-color);
+  border-radius: 12px;
+  padding: 1rem 1.8rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: var(--text-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: auto;
+  min-width: 150px;
+  max-width: 300px;
+  backdrop-filter: blur(5px);
+  margin: 0 0.5rem;
+}
+
+.choice-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+  transition: width 0.3s ease;
+}
+
+.choice-button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--accent-color);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15), 0 0 10px rgba(108, 92, 231, 0.3);
+}
+
+.choice-button:hover::before {
+  width: 8px;
+}
+
+.choice-text {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding-left: 5px;
+  transition: var(--transition-smooth);
+}
+
+.choice-button:hover .choice-text {
+  transform: translateX(3px);
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Enhanced Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes titlePulse {
+  from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+  to { text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); }
+}
+
+@keyframes buttonGlow {
+  0% { box-shadow: 0 8px 20px rgba(233, 64, 87, 0.4); }
+  50% { box-shadow: 0 8px 25px rgba(233, 64, 87, 0.6), 0 0 15px rgba(108, 92, 231, 0.5); }
+  100% { box-shadow: 0 8px 20px rgba(233, 64, 87, 0.4); }
+}
+
+@keyframes parallaxShift {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(5px) translateY(-5px); }
+  50% { transform: translateX(0) translateY(-10px); }
+  75% { transform: translateX(-5px) translateY(-5px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes dialogBoxAppear {
+  from { transform: translateY(50px) translateX(-50%); opacity: 0; }
+  to { transform: translateY(0) translateX(-50%); opacity: 1; }
+}
+
+@keyframes textReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes characterSlideInLeft {
+  from { transform: translateX(-150px); opacity: 0; }
+  to { transform: translateX(-50px); opacity: 1; }
+}
+
+@keyframes characterSlideInRight {
+  from { transform: translateX(150px); opacity: 0; }
+  to { transform: translateX(50px); opacity: 1; }
+}
+
+@keyframes characterSlideInBottom {
+  from { transform: translateY(150px) translateX(-50%); opacity: 0; }
+  to { transform: translateY(0) translateX(-50%); opacity: 1; }
+}
+
+@keyframes subtlePulse {
+  from { transform: scale(1.05); }
+  to { transform: scale(1.07); }
+}
+
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .dialog-box {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .character-name {
+    font-size: 1.8rem;
+  }
+  
+  .dialog-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 3.5rem;
+  }
+  
+  .welcome-message {
+    font-size: 1.1rem;
+  }
+  
+  .start-button {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .character {
+    height: 60%;
+  }
+  
+  .dialog-box {
+    padding: 1.2rem;
+  }
+  
+  .character-name {
+    font-size: 1.5rem;
+  }
+  
+  .dialog-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .choice-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Fade-in animation for scene transitions */
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Slide-up animation for dialog box */
+.slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+/* Improved character highlight effect */
+.character.speaking::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 10px;
+  background: radial-gradient(ellipse at center, rgba(108, 92, 231, 0.5) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(5px);
+}
+
+.speaker-prefix {
+  font-weight: 700;
+  color: var(--accent-color);
+  font-family: var(--font-decorative);
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .speaker-prefix {
+    font-size: 1.2rem;
+  }
+}
